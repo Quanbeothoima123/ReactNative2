@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#D3D3D3",
   },
   headerText: {
-    fontSize: 24, // Tăng kích thước chữ
+    fontSize: 25, // Tăng kích thước chữ
     fontWeight: "bold", // Làm đậm chữ (tuỳ chọn)
   },
   title: {
