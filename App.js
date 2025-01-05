@@ -1,115 +1,40 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-  View,
-  ScrollView,
-} from "react-native";
-import Rectangle from "./component/rectangle";
+import React from "react";
+import { SafeAreaView, Text } from "react-native";
+import Box from "./component/box";
+
 export default function App() {
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView style={styles.container}>
-        <ScrollView>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Đăng nhập</Text>
-          </View>
-          <View style={styles.title}>
-            <Text style={styles.titleText}>Nhập số điện thoại</Text>
-          </View>
-          <View style={styles.desc}>
-            <Text>
-              Dùng số điện thoại để đăng nhập hoặc đăng ký tài khoản tại
-              OneHousing Pro
-            </Text>
-          </View>
-          <View style={styles.inputText}>
-            <TextInput
-              placeholder="Nhập số điện thoại của bạn"
-              keyboardType="numeric"
-              style={styles.textInput}
-            />
-          </View>
-          <View>
-            <TouchableOpacity style={styles.buttonOpacity}>
-              <Text style={styles.buttonText}>Tiếp tục</Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={[
-              { flexDirection: "row" },
-              { justifyContent: "center" },
-              { alignItems: "center" },
-              { backgroundColor: "black" },
-            ]}
-          >
-            {/* Một rectangle */}
-            <Rectangle
-              width={100}
-              height={100}
-              color={"yellow"}
-              style={{ flex: 1 }}
-            />
-            <Text style={[{ flex: 1 }, { color: "white" }]}>
-              Đây là một cái hộp màu vàng, có thật sự nó màu vàng không
-            </Text>
-          </View>
-          <StatusBar style="auto" />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    <SafeAreaView style={{ flex: 1, padding: 20, paddingTop: 40 }}>
+      {/* Box 1 */}
+      <Box
+        title="Box 1"
+        borderColor="blue"
+        borderWidth={3}
+        myCustomProp="Custom content for Box 1"
+        style={{ backgroundColor: "#E8F6FF" }}
+      >
+        <Text style={{ fontSize: 18 }}>This is the first Box</Text>
+      </Box>
+
+      {/* Box 2 */}
+      <Box
+        title="Box 2"
+        borderColor="green"
+        borderWidth={5}
+        myCustomProp="Custom content for Box 2"
+        style={{ backgroundColor: "#F0FFF4" }}
+      >
+        <Text style={{ fontSize: 18, color: "green" }}>
+          This is the second Box
+        </Text>
+      </Box>
+
+      {/* Box 3 without title and myCustomProp */}
+      <Box borderColor="red" borderWidth={1}>
+        <Text style={{ fontSize: 18 }}>
+          This is the third Box without a title
+        </Text>
+      </Box>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 20,
-    marginTop: 40,
-  },
-  header: {
-    paddingBottom: 10,
-    marginBottom: 60,
-    borderBottomWidth: 2,
-    borderBottomColor: "#D3D3D3",
-  },
-  headerText: {
-    fontSize: 24, // Tăng kích thước chữ
-    fontWeight: "bold", // Làm đậm chữ (tuỳ chọn)
-  },
-  title: {
-    marginBottom: 20,
-  },
-  titleText: {
-    fontSize: 20,
-  },
-  desc: {
-    marginBottom: 10,
-  },
-  inputText: {
-    marginBottom: 80,
-  },
-  textInput: {
-    borderBottomWidth: 1, // Chỉ có viền dưới
-    borderColor: "#ccc", // Màu của viền
-    paddingVertical: 10, // Khoảng cách bên trong
-    fontSize: 16, // Kích thước chữ
-  },
-  buttonOpacity: {
-    backgroundColor: "#D3D3D3",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-});
-//test push code on master branch
