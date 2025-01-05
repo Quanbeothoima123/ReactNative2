@@ -8,37 +8,59 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   View,
+  ScrollView,
 } from "react-native";
-
+import Rectangle from "./component/rectangle";
 export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Đăng nhập</Text>
-        </View>
-        <View style={styles.title}>
-          <Text style={styles.titleText}>Nhập số điện thoại</Text>
-        </View>
-        <View style={styles.desc}>
-          <Text>
-            Dùng số điện thoại để đăng nhập hoặc đăng ký tài khoản tại
-            OneHousing Pro
-          </Text>
-        </View>
-        <View style={styles.inputText}>
-          <TextInput
-            placeholder="Nhập số điện thoại của bạn"
-            keyboardType="numeric"
-            style={styles.textInput}
-          />
-        </View>
-        <View>
-          <TouchableOpacity style={styles.buttonOpacity}>
-            <Text style={styles.buttonText}>Tiếp tục</Text>
-          </TouchableOpacity>
-        </View>
-        <StatusBar style="auto" />
+        <ScrollView>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Đăng nhập</Text>
+          </View>
+          <View style={styles.title}>
+            <Text style={styles.titleText}>Nhập số điện thoại</Text>
+          </View>
+          <View style={styles.desc}>
+            <Text>
+              Dùng số điện thoại để đăng nhập hoặc đăng ký tài khoản tại
+              OneHousing Pro
+            </Text>
+          </View>
+          <View style={styles.inputText}>
+            <TextInput
+              placeholder="Nhập số điện thoại của bạn"
+              keyboardType="numeric"
+              style={styles.textInput}
+            />
+          </View>
+          <View>
+            <TouchableOpacity style={styles.buttonOpacity}>
+              <Text style={styles.buttonText}>Tiếp tục</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={[
+              { flexDirection: "row" },
+              { justifyContent: "center" },
+              { alignItems: "center" },
+              { backgroundColor: "black" },
+            ]}
+          >
+            {/* Một rectangle */}
+            <Rectangle
+              width={100}
+              height={100}
+              color={"yellow"}
+              style={{ flex: 1 }}
+            />
+            <Text style={[{ flex: 1 }, { color: "white" }]}>
+              Đây là một cái hộp màu vàng, có thật sự nó màu vàng không
+            </Text>
+          </View>
+          <StatusBar style="auto" />
+        </ScrollView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
