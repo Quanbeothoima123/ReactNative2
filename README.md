@@ -1,2 +1,2 @@
-"# Bài tập 1: Tạo giao diện cơ bản"
-![Ảnh file bài tập](bai1.jpg)
+"# Bài tập 2.2: tạo thông báo cơ bản"
+![Ảnh file bài tập](demo2.2.jpg)
