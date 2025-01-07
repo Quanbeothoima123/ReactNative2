@@ -1,2 +1,3 @@
-"# Bài tập 1: Tạo giao diện cơ bản"
-![Ảnh file bài tập](bai1.jpg)
+"# Bài tập 2.1: Tạo custom component"
+![Ảnh component](SquareBox.png)
+![Ảnh code](ImageAppCode.png)
