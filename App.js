@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, FlatList, StyleSheet, View } from "react-native";
+import { SafeAreaView, FlatList, StyleSheet, View, Text } from "react-native";
 import NoticeCustom from "./component/NoticeCustom";
 
 const App = () => {
@@ -59,7 +59,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={styles.alignText}>
         <Text>Thông báo</Text>
       </View>
       <FlatList
