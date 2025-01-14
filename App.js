@@ -1,86 +1,79 @@
 import React from "react";
-import { SafeAreaView, FlatList, StyleSheet, View, Text } from "react-native";
-import NoticeCustom from "./component/NoticeCustom";
+import {
+  FlatList,
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  SafeAreaView,
+} from "react-native";
 
 const App = () => {
-  const data = [
-    {
-      id: 1,
-      iConName: "check-circle",
-      Title: "Bước 1: Xác định nhu cầu khách hàng",
-      Desc: "Vũ Văn Hoàng sắp đến hạn lúc 01/08/2020 9:00",
-      SubTitle: "20/08/2020, 06:00",
-    },
-    {
-      id: 2,
-      iConName: "users",
-      Title: "Bạn có khách hàng mới!",
-      Desc: "Chúc mừng bạn, bạn có khách hàng mới. Hãy mau chóng liên lạc ngay.",
-      SubTitle: "20/08/2020, 06:00",
-    },
-    {
-      id: 3,
-      iConName: "users",
-      Title: "Khách hàng được chia sẻ bị trùng",
-      Desc: "Rất tiếc, khách hàng được chia sẻ đã tồn tại trên hệ thống.",
-      SubTitle: "20/08/2020, 06:00",
-    },
-    {
-      id: 4,
-      iConName: "users",
-      Title: "Khách hàng được thêm bị trùng",
-      Desc: "Rất tiếc, khách hàng được thêm đã tồn tại trên hệ thống.",
-      SubTitle: "20/08/2020, 06:00",
-    },
-    {
-      id: 5,
-      iConName: "check-circle",
-      Title: "Công việc sắp đến hạn trong hôm nay",
-      Desc: "Bạn có 17 công việc sắp đến hạn.",
-      SubTitle: "20/08/2020, 06:00",
-    },
-    {
-      id: 6,
-      iConName: "check-circle",
-      Title: "Công việc đã quá hạn",
-      Desc: "Bạn có 17 công việc bị quá hạn. Hãy kiểm tra và lên kế hoạch.",
-      SubTitle: "20/08/2020, 06:00",
-    },
+  // Danh sách sản phẩm
+  const products = [
+    { id: "1", name: "Pixel 4xl", price: "100$" },
+    { id: "2", name: "Iphone 15promax", price: "1500$" },
+    { id: "3", name: "Iqoo 13", price: "500$" },
   ];
 
+  // Hàm xử lý khi bấm vào sản phẩm
+  const handleProductPress = (productName) => {
+    Alert.alert("Thông báo", `Tên sản phẩm: ${productName}`);
+  };
+
+  // Hàm hiển thị từng item
   const renderItem = ({ item }) => (
-    <NoticeCustom
-      iConName={item.iConName}
-      Title={item.Title}
-      Desc={item.Desc}
-      SubTitle={item.SubTitle}
-    />
+    <TouchableOpacity onPress={() => handleProductPress(item.name)}>
+      <View style={styles.itemContainer}>
+        <Text style={styles.productName}>{item.name}</Text>
+        <Text style={styles.productPrice}>${item.price}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.alignText}>
-        <Text>Thông báo</Text>
+      <View>
+        <FlatList
+          data={products}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
       </View>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
     </SafeAreaView>
   );
 };
 
-export default App;
-
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
-    paddingTop: 50,
+    backgroundColor: "#f8f8f8",
+    padding: 16,
+    paddingTop: 40,
   },
-  alignText: {
+  itemContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+    padding: 16,
+    marginVertical: 8,
+    backgroundColor: "#ffffff",
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  productName: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  productPrice: {
+    fontSize: 14,
+    color: "#555",
   },
 });
+
+export default App;

@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     borderRadius: 8, // Bo tròn khối
     marginVertical: 5,
     shadowColor: "#000", // Hiệu ứng đổ bóng
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 }, // Độ rộng cao
+    shadowOpacity: 0.1, // Độ mờ
+    shadowRadius: 4, // độ bo góc của bóng
     elevation: 2, // Đổ bóng trên Android
   },
   iconContainer: {
