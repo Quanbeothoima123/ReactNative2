@@ -1,4 +1,4 @@
-Ảnh sản phần mềm
+Cấn Anh Quân-22810310260
 ![Ảnh 1](anh2.jpg)
 ![Ảnh 2](anh1.jpg)
 So sánh giữa FlatList và SectionList
