@@ -1,138 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  SectionList,
-  Text,
   View,
-  StyleSheet,
+  Text,
+  TextInput,
   TouchableOpacity,
-  Alert,
-  SafeAreaView,
-  FlatList,
-  ScrollView,
+  StyleSheet,
 } from "react-native";
 
-const App = () => {
-  const products = [
-    { id: "1", name: "Pixel 4xl", price: "100$" },
-    { id: "2", name: "Iphone 15promax", price: "1500$" },
-    { id: "3", name: "Iqoo 13", price: "500$" },
-  ];
+const PhoneNumberInput = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [error, setError] = useState("");
 
-  const groupedProducts = [
-    {
-      title: "iPhone",
-      data: ["iPhone 15 Pro", "iPhone 14", "iPhone SE (2023)"],
-    },
-    {
-      title: "Google Pixel",
-      data: ["Google Pixel 8 Pro", "Google Pixel 7a", "Google Pixel Fold"],
-    },
-    { title: "Vivo", data: ["Vivo X90 Pro", "Vivo Y78", "Vivo V29 5G"] },
-    {
-      title: "Các sản phẩm mới nhất",
-      data: ["Samsung Galaxy S23 Ultra", "OnePlus 12", "Xiaomi 14 Pro"],
-    },
-  ];
-
-  const handleProductPress = (productName) => {
-    Alert.alert("Thông báo", `Tên sản phẩm: ${productName}`);
+  const isValidVietnamPhoneNumber = (number) => {
+    const regex = /^(0[2-9])[0-9]{8}$/;
+    return regex.test(number);
   };
 
-  const renderItemSection = ({ item }) => (
-    <TouchableOpacity onPress={() => handleProductPress(item)}>
-      <View style={styles.itemContainer}>
-        <Text style={styles.productName}>{item}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const handleChangeText = (text) => {
+    const numericText = text.replace(/\D/g, ""); // Loại bỏ ký tự không phải số
+    setPhoneNumber(numericText);
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleProductPress(item.name)}>
-      <View style={styles.itemContainer}>
-        <Text style={styles.productName}>{item.name}</Text>
-        <Text style={styles.productPrice}>{item.price}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+    if (numericText.length === 10) {
+      setError("");
+    } else {
+      setError("Số điện thoại phải có 10 số");
+    }
+  };
+
+  const handleSubmit = () => {
+    if (!isValidVietnamPhoneNumber(phoneNumber)) {
+      setError("Số điện thoại không đúng định dạng. Vui lòng nhập lại");
+    } else {
+      setError("");
+      alert("Số điện thoại hợp lệ: " + phoneNumber);
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {/* SectionList */}
-        <View style={{ marginBottom: 20 }}>
-          <Text style={styles.listTitle}>Danh sách nhóm sản phẩm</Text>
-          <SectionList
-            sections={groupedProducts}
-            keyExtractor={(item, index) => item + index}
-            renderItem={renderItemSection}
-            renderSectionHeader={({ section }) => (
-              <View style={styles.headerContainer}>
-                <Text style={styles.sectionTitle}>{section.title}</Text>
-              </View>
-            )}
-            nestedScrollEnabled
-          />
-        </View>
-
-        {/* FlatList */}
-        <View>
-          <Text style={styles.listTitle}>Danh sách sản phẩm</Text>
-          <FlatList
-            data={products}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-            nestedScrollEnabled
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Đăng nhập</Text>
+      <Text style={styles.subtitle}>Nhập số điện thoại</Text>
+      <Text style={styles.description}>
+        Dùng số điện thoại để đăng nhập hoặc đăng ký tài khoản OneHousing Pro
+      </Text>
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        value={phoneNumber}
+        onChangeText={handleChangeText}
+        maxLength={10}
+      />
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Tiếp tục</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
-    padding: 16,
-    paddingTop: 40,
+    padding: 20,
+    backgroundColor: "#fff",
+    justifyContent: "center",
   },
-  listTitle: {
-    fontSize: 22,
+  title: {
+    fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10,
-    color: "#333",
   },
-  itemContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: "#ffffff",
-    borderRadius: 8,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+  subtitle: {
+    fontSize: 18,
+    marginTop: 10,
   },
-  productName: {
-    fontSize: 16,
-    fontWeight: "500",
-  },
-  productPrice: {
+  description: {
     fontSize: 14,
-    color: "#888",
+    color: "gray",
+    marginBottom: 10,
   },
-  headerContainer: {
-    padding: 10,
-    backgroundColor: "yellow",
-    borderRadius: 20,
-    marginBottom: 8,
+  input: {
+    borderBottomWidth: 1,
+    borderColor: "gray",
+    fontSize: 18,
+    paddingVertical: 5,
+    marginBottom: 10,
   },
-  sectionTitle: {
-    fontSize: 20,
-    color: "blue",
+  errorText: {
+    color: "red",
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: "blue",
+    padding: 15,
+    alignItems: "center",
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 
-export default App;
+export default PhoneNumberInput;
