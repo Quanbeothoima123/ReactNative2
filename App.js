@@ -1,106 +1,28 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import PhoneNumberInput from "./component/screens/PhoneNumberInput";
+import HomeScreen from "./component/screens/HomeScreen";
 
-const PhoneNumberInput = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [error, setError] = useState("");
+const Stack = createStackNavigator();
 
-  const isValidVietnamPhoneNumber = (number) => {
-    const regex = /^(0[2-9])[0-9]{8}$/;
-    return regex.test(number);
-  };
-
-  const handleChangeText = (text) => {
-    const numericText = text.replace(/\D/g, ""); // Loại bỏ ký tự không phải số
-    setPhoneNumber(numericText);
-
-    if (numericText.length === 10) {
-      setError("");
-    } else {
-      setError("Số điện thoại phải có 10 số");
-    }
-  };
-
-  const handleSubmit = () => {
-    if (!isValidVietnamPhoneNumber(phoneNumber)) {
-      setError("Số điện thoại không đúng định dạng. Vui lòng nhập lại");
-    } else {
-      setError("");
-      alert("Số điện thoại hợp lệ: " + phoneNumber);
-    }
-  };
-
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Đăng nhập</Text>
-      <Text style={styles.subtitle}>Nhập số điện thoại</Text>
-      <Text style={styles.description}>
-        Dùng số điện thoại để đăng nhập hoặc đăng ký tài khoản OneHousing Pro
-      </Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        value={phoneNumber}
-        onChangeText={handleChangeText}
-        maxLength={10}
-      />
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Tiếp tục</Text>
-      </TouchableOpacity>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="PhoneNumberInput">
+        <Stack.Screen
+          name="PhoneNumberInput"
+          component={PhoneNumberInput}
+          options={{ title: "Nhập số điện thoại" }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Trang chủ" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 18,
-    marginTop: 10,
-  },
-  description: {
-    fontSize: 14,
-    color: "gray",
-    marginBottom: 10,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderColor: "gray",
-    fontSize: 18,
-    paddingVertical: 5,
-    marginBottom: 10,
-  },
-  errorText: {
-    color: "red",
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  button: {
-    backgroundColor: "blue",
-    padding: 15,
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
-
-export default PhoneNumberInput;
+export default App;
