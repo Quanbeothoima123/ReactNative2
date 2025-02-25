@@ -1,2 +1,3 @@
-"# Bài tập 1: Tạo giao diện cơ bản"
-![Ảnh file bài tập](bai1.jpg)
+"Sử dụng stack navigation"
+![Ảnh file bài tập](HomeScreens.jpg)
+![Ảnh file bài tập](PhoneInput.jpg)
