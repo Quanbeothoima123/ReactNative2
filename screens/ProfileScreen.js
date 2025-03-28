@@ -16,15 +16,20 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Nút Back */}
       <TouchableOpacity
-        style={styles.backButton}
         onPress={() => navigation.goBack()}
+        style={{
+          paddingTop: 40,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
       >
         <Ionicons name="arrow-back" size={24} color="black" />
+        <Text style={{ fontSize: 18, fontWeight: "bold", marginLeft: 110 }}>
+          Profile
+        </Text>
       </TouchableOpacity>
 
-      {/* Ảnh đại diện */}
       <View style={styles.profileContainer}>
         <Image
           source={require("../assets/img/Ellipse 22.png")}
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
   },
   editIcon: {
     position: "absolute",
-    bottom: 0,
+    bottom: 60,
     right: 120,
     backgroundColor: "#6C63FF",
     padding: 5,

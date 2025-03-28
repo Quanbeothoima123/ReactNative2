@@ -8,8 +8,11 @@ import {
   ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
 
 const OrderScreen = () => {
+  const navigation = useNavigation();
   const [quantity, setQuantity] = useState(2);
 
   return (
@@ -19,6 +22,28 @@ const OrderScreen = () => {
         source={require("../assets/img/Rectangle 1.png")}
         style={styles.background}
       >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            paddingHorizontal: 20,
+            paddingTop: 20,
+            backgroundColor: "#F8F6EF",
+          }}
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Icon name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            Shopping Cart
+          </Text>
+
+          <TouchableOpacity onPress={() => console.log("Xóa giỏ hàng")}>
+            <Icon name="trash-outline" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
         <View style={styles.imageContainer}>
           <Image
             source={require("../assets/img/OrderScreen/burgerBaoQuat.png")}
@@ -58,6 +83,7 @@ const OrderScreen = () => {
 
           <View
             style={{
+              marginTop: -20,
               flexDirection: "row",
               alignContent: "center",
               justifyContent: "space-between",
@@ -86,18 +112,55 @@ const OrderScreen = () => {
 
           {/* Địa chỉ giao hàng */}
           <View style={styles.deliveryAddress}>
-            <Ionicons name="location" size={20} color="green" />
-            <Text style={styles.addressText}>Dhaka, Bangladesh</Text>
-            <TouchableOpacity>
-              <Ionicons name="pencil" size={18} color="blue" />
-            </TouchableOpacity>
+            <View
+              style={{
+                width: 210,
+                backgroundColor: "#C0EADB",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 67,
+                width: 210,
+                borderRadius: 7,
+              }}
+            >
+              <Ionicons name="location" size={20} color="green" />
+              <View style={{ paddingLeft: 20 }}>
+                <Text>Deliver Address</Text>
+                <Text>Dhaka, Bangladesh</Text>
+              </View>
+            </View>
+            <View
+              style={{
+                height: "100%",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#A9A6FF",
+                paddingHorizontal: 20,
+                borderRadius: 5,
+                marginRight: 20,
+              }}
+            >
+              <TouchableOpacity>
+                <Ionicons name="pencil" size={18} color="blue" />
+              </TouchableOpacity>
+            </View>
           </View>
 
           {/* Phương thức thanh toán */}
           <View style={styles.paymentMethod}>
             <Ionicons name="card" size={20} color="blue" />
             <Text style={styles.paymentText}>Payment Method</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                paddingVertical: 7,
+                paddingHorizontal: 20,
+                borderColor: "#4A43EC",
+                borderWidth: 1,
+                borderRadius: 20,
+              }}
+            >
               <Text style={styles.changeText}>Change</Text>
             </TouchableOpacity>
           </View>
@@ -150,16 +213,20 @@ const OrderScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", marginTop: 60 },
+  container: { flex: 1, backgroundColor: "#fff", marginTop: 20 },
   imageContainer: { alignItems: "center", paddingTop: 20 },
   mainImage: { width: "90%", height: 200, borderRadius: 15 },
   discountBadge: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 50,
+    height: 50,
     position: "absolute",
-    top: 20,
-    left: 20,
+    top: 40,
+    left: 40,
     backgroundColor: "blue",
     padding: 5,
-    borderRadius: 20,
+    borderRadius: 25,
   },
   discountText: { color: "white", fontSize: 12, fontWeight: "bold" },
   thumbnailContainer: { flexDirection: "row", marginTop: -20 },
@@ -184,17 +251,18 @@ const styles = StyleSheet.create({
   quantity: { fontSize: 18, marginHorizontal: 10, fontWeight: "bold" },
   deliveryAddress: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#E6F4EA",
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
+    paddingBottom: 10,
+    // backgroundColor: "#E6F4EA",
+    // padding: 10,
+    // borderRadius: 10,
+    // marginBottom: 10,
   },
   addressText: { flex: 1, fontSize: 14, marginLeft: 10 },
   paymentMethod: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#F0F5FF",
     padding: 10,
     borderRadius: 10,
     marginBottom: 10,
